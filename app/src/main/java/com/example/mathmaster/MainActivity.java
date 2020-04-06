@@ -3,8 +3,9 @@ package com.example.mathmaster;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.support.v7.app.AppCompatActivity;
-import android.view.View;
+import android.util.Log;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -30,18 +31,40 @@ public class MainActivity extends AppCompatActivity {
         textView1 = findViewById(R.id.textView1);
         textView2 = findViewById(R.id.textView2);
         textView3 = findViewById(R.id.textView3);
+        textView4 = findViewById(R.id.textView4);
+        textView5 = findViewById(R.id.textView5);
 
-        setAnswers(getAnswers(20));
         setQuestion(10);
-
+        setAnswers(getAnswers(Integer.valueOf((String) textView4.getText()) + Integer.valueOf((String) textView5.getText())));
         startTimer();
 
     }
 
-    public void setQuestion(int number) {
-        Random random = new Random();
-        textView4.setText(String.valueOf(random.nextInt(number)));
-        textView5.setText(String.valueOf(random.nextInt(number)));
+
+    public void checkAnswer(android.view.View view) {
+
+
+        TextView t = (TextView) view;
+        if (t.getText().equals(String.valueOf(Integer.valueOf((String) textView4.getText()) + Integer.valueOf((String) textView5.getText())))) {
+            Toast.makeText(getApplicationContext(), "True", Toast.LENGTH_LONG).show();
+        } else {
+            Toast.makeText(getApplicationContext(), "False", Toast.LENGTH_LONG).show();
+        }
+        setQuestion(10);
+        setAnswers(getAnswers(Integer.valueOf((String) textView4.getText()) + Integer.valueOf((String) textView5.getText())));
+
+
+    }
+
+    public void setQuestion(Integer number) {
+        try {
+            Random random = new Random();
+            textView4.setText(String.valueOf(random.nextInt(number)));
+            textView5.setText(String.valueOf(random.nextInt(number)));
+        } catch (Exception e) {
+            Log.i("Error", e.getMessage());
+
+        }
     }
 
     public void setAnswers(Integer[] answersArray) {
@@ -49,15 +72,6 @@ public class MainActivity extends AppCompatActivity {
         textView1.setText(String.valueOf(answersArray[1]));
         textView2.setText(String.valueOf(answersArray[2]));
         textView3.setText(String.valueOf(answersArray[3]));
-    }
-
-    public void checkAnswer(View view) {
-
-
-        setAnswers(getAnswers(20));
-
-
-
     }
 
     protected Integer[] getAnswers(Integer rightAnswer) {
