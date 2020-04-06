@@ -21,6 +21,7 @@ public class MainActivity extends AppCompatActivity {
 
     TextView textView4;
     TextView textView5;
+    TextView scoreView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
         textView3 = findViewById(R.id.textView3);
         textView4 = findViewById(R.id.textView4);
         textView5 = findViewById(R.id.textView5);
-
+        scoreView = findViewById(R.id.scoreView);
         setQuestion(10);
         setAnswers(getAnswers(Integer.valueOf((String) textView4.getText()) + Integer.valueOf((String) textView5.getText())));
         startTimer();
@@ -47,6 +48,8 @@ public class MainActivity extends AppCompatActivity {
         TextView t = (TextView) view;
         if (t.getText().equals(String.valueOf(Integer.valueOf((String) textView4.getText()) + Integer.valueOf((String) textView5.getText())))) {
             Toast.makeText(getApplicationContext(), "True", Toast.LENGTH_LONG).show();
+
+            scoreView.setText(String.valueOf(Integer.valueOf((String) scoreView.getText()) + 1));
         } else {
             Toast.makeText(getApplicationContext(), "False", Toast.LENGTH_LONG).show();
         }
@@ -89,7 +92,7 @@ public class MainActivity extends AppCompatActivity {
         return randomNumbers ;
     };
     protected  void startTimer () {
-        new CountDownTimer(10000,1000) {
+        new CountDownTimer(30000, 1000) {
 
             @Override
             public void onTick(long millisUntilFinished) {
@@ -100,6 +103,13 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onFinish() {
                 timerView.setText("finished");
+                textView.setClickable(false);
+                textView1.setClickable(false);
+                textView2.setClickable(false);
+                textView3.setClickable(false);
+
+                Toast.makeText(getApplicationContext(), "You Have Scored " + scoreView.getText().toString() + "within 30 second", Toast.LENGTH_LONG).show();
+
 
             }
         }.start();
