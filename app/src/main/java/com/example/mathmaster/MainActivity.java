@@ -3,6 +3,7 @@ package com.example.mathmaster;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 import android.widget.TextView;
 
 import java.util.Arrays;
@@ -12,14 +13,36 @@ import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
     TextView timerView;
+    TextView textView;
+    TextView textView1;
+    TextView textView2;
+    TextView textView3;
+
+    TextView textView4;
+    TextView textView5;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
         timerView = findViewById(R.id.timerView);
+        textView = findViewById(R.id.textView);
+        textView1 = findViewById(R.id.textView1);
+        textView2 = findViewById(R.id.textView2);
+        textView3 = findViewById(R.id.textView3);
+
+        Integer[] answersArray = getAnswers(20);
+
+        textView.setText(String.valueOf(answersArray[0]));
+        textView1.setText(String.valueOf(answersArray[1]));
+        textView2.setText(String.valueOf(answersArray[2]));
+        textView3.setText(String.valueOf(answersArray[3]));
 
         startTimer();
+
+    }
+
+    public void checkAnswer(View view) {
 
     }
 
