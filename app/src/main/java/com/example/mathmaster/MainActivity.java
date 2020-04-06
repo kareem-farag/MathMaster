@@ -1,14 +1,13 @@
 package com.example.mathmaster;
 
+import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.util.Log;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import org.w3c.dom.Text;
-
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
@@ -19,22 +18,23 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         timerView = findViewById(R.id.timerView);
+
         startTimer();
-    /*
-        Log.i("Random number :" , String.valueOf(generateRandomArray()[0]));
-        Log.i("Random number :" , String.valueOf(generateRandomArray()[1]));
-        Log.i("Random number :" , String.valueOf(generateRandomArray()[2]));
-        Log.i("Random number :" , String.valueOf(generateRandomArray()[3]));
-    */
+
     }
-    protected int[] generateRandomArray () {
-        int[] randomNumbers = new int[4] ;
+
+    protected Integer[] getAnswers(Integer rightAnswer) {
+        Integer[] randomNumbers = new Integer[4];
+
         Random random = new Random();
-        randomNumbers[0]= random.nextInt(21);
+        randomNumbers[0] = rightAnswer;
         randomNumbers[1]= random.nextInt(21);
         randomNumbers[2]= random.nextInt(21);
         randomNumbers[3]= random.nextInt(21);
 
+        List<Integer> result = Arrays.asList(randomNumbers);
+        Collections.shuffle(result);
+        result.toArray(randomNumbers);
         return randomNumbers ;
     };
     protected  void startTimer () {
