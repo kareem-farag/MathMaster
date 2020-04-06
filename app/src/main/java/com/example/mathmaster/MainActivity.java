@@ -31,18 +31,32 @@ public class MainActivity extends AppCompatActivity {
         textView2 = findViewById(R.id.textView2);
         textView3 = findViewById(R.id.textView3);
 
-        Integer[] answersArray = getAnswers(20);
-
-        textView.setText(String.valueOf(answersArray[0]));
-        textView1.setText(String.valueOf(answersArray[1]));
-        textView2.setText(String.valueOf(answersArray[2]));
-        textView3.setText(String.valueOf(answersArray[3]));
+        setAnswers(getAnswers(20));
+        setQuestion(10);
 
         startTimer();
 
     }
 
+    public void setQuestion(int number) {
+        Random random = new Random();
+        textView4.setText(String.valueOf(random.nextInt(number)));
+        textView5.setText(String.valueOf(random.nextInt(number)));
+    }
+
+    public void setAnswers(Integer[] answersArray) {
+        textView.setText(String.valueOf(answersArray[0]));
+        textView1.setText(String.valueOf(answersArray[1]));
+        textView2.setText(String.valueOf(answersArray[2]));
+        textView3.setText(String.valueOf(answersArray[3]));
+    }
+
     public void checkAnswer(View view) {
+
+
+        setAnswers(getAnswers(20));
+
+
 
     }
 
